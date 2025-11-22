@@ -49,6 +49,32 @@ void Book_Tickect(char name[]){
     printf("Your PNR: %d\n", p.pnr);
 }
 
+void printTicket(int pnr){
+    for(int i =0; i < confirmedCount; i++){
+        if(confirmed[i].pnr == pnr){
+            printf("\n----------Train Ticket--------------\n");
+            printf("PNR: %d\n", confirmed[i].pnr);
+            printf("Name: %s\n", confirmed[i].name);
+            printf("Status: CONFIRMED\n");
+            printf("\n------------------------------------\n");
+            return;
+        }
+    }
+    for(int i =0; i < waitingCount; i++){
+        if(waiting[i].pnr == pnr){
+            printf("\n----------Train Ticket--------------\n");
+            printf("PNR: %d\n", waiting[i].pnr);
+            printf("Name: %s\n", waiting[i].name);
+            printf("Status: WAITING\n");
+            printf("\n------------------------------------\n");
+            return;
+        }
+    }
+    printf("No ticket found with PNR: %d\n", pnr);
+
+}
+
 
     
+
 
