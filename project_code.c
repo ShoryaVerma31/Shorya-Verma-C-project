@@ -74,7 +74,53 @@ void printTicket(int pnr){
 
 }
 
+int main(){
+    int choice, pnr;
+    char name[60];
+
+    while(1){
+        printf("\n--------Train ticket Reservation System-----------\n");
+        printf("1. Check Seat Availability\n");
+        printf("2. Book Ticket\n");
+        printf("3. Cancel Ticket\n");
+        printf("4. Print Ticket\n");
+        printf("5. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice){
+            case 1 : 
+                printf("Seat Available: %d\n", seatsAvailable());
+                break;
+            case 2 : 
+                printf("Enter Passenger Name: "); 
+                scanf("%s", name);
+                bookTicket(name);
+                break;
+            case 3 :
+                printf("Enter PNR to cancel: "); 
+                scanf("%d", &pnr);
+                cancelTicket(pnr);
+                break;
+            
+            case 4 : 
+                printf("Enter PNR to print: "); 
+                scanf("%d", &pnr);
+                printTicket(pnr);
+                break;
+            case 5 : 
+                printf("Exiting...!\n");
+                exit(0);
+            default:
+                printf("Invalid Choice!\n");
+                   
+        }
+    }
+    return 0;
+}
+
 
     
+
 
 
