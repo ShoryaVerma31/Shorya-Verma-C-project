@@ -74,6 +74,14 @@ void printTicket(int pnr){
 
 }
 
+void cancelTicket(int pnr) {
+    for(int i =0; i< confirmedCount; i++){
+        if(confirmd[i].pnr == pnr){
+            printf("Ticket with PNR %d cancelled.\n", pnr);
+        }
+    }
+}
+
 int main(){
     int choice, pnr;
     char name[60];
@@ -121,6 +129,7 @@ int main(){
 
 
     
+
 
 
 
