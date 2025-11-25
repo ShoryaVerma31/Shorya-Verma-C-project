@@ -78,6 +78,11 @@ void cancelTicket(int pnr) {
     for(int i =0; i< confirmedCount; i++){
         if(confirmd[i].pnr == pnr){
             printf("Ticket with PNR %d cancelled.\n", pnr);
+
+            for(int j = i, j < confirmedCount - 1; j++){
+                confirmed[j] = confirmed[j+1];
+            }
+            confirmedCount--;
         }
     }
 }
@@ -129,6 +134,7 @@ int main(){
 
 
     
+
 
 
 
