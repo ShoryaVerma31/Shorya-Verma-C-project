@@ -83,6 +83,11 @@ void cancelTicket(int pnr) {
                 confirmed[j] = confirmed[j+1];
             }
             confirmedCount--;
+
+            if(watingCount > 0){
+                confirmed[confirmedCount++] = waiting[0];
+            }
+                
         }
     }
 }
@@ -134,6 +139,7 @@ int main(){
 
 
     
+
 
 
 
