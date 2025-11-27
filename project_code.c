@@ -2,23 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_SEATS 5
-#define MAX_WAITING 3
+#define MAX_SEATS 5       // maximum avaliable seats for confirmation
+#define MAX_WAITING 3     // maximum number of seats for waiting list
 
+// status either confirmed or waiting for each passenger
+enum Status { CONFIRMED, WAITING }; 
 
-enum Status { CONFIRMED, WAITING };
-
+// to store passenger details we use  -> structure
 typedef struct {
     int pnr;
     char name[50];
     enum Status status;
 } Passenger;
 
-Passenger confirmed[MAX_SEATS];
-Passenger waiting[MAX_WAITING];
-int confirmedCount = 0, waitingCount = 0;
-int next_pnr = 1001;
+Passenger confirmed[MAX_SEATS];   // array which stores confirmed passengers 
+Passenger waiting[MAX_WAITING];   // array which stores waiting passengers 
 
+// counters to check how many seats are filled
+int confirmedCount = 0;
+int waitingCount = 0;
+
+int next_pnr = 1001;  // variable to genrate pnr
+
+// function for genrating unique PNR for each passenger
 int gentrate_PNR(){
     return next_pnr++;
 }
@@ -32,12 +38,12 @@ void Book_Tickect(char name[]){
     p.pnr = genrate_PNR();
     strcpy(p.name, name);
 
-     if(confirmedCount < MAX_SEATS) {
+     if(confirmedCount < MAX_SEATS){
         p.status = CONFIRMED;
         confirmed[confirmedCount++] = p;
         printf("Ticket Booked Successfully!\n");
     } 
-    else if(waitingCount < MAX_WAITING) {
+    else if(waitingCount < MAX_WAITING){
         p.status = WAITING;
         waiting[waitingCount++] = p;
         printf("Train Full .Added to waiting list.\n");
@@ -74,7 +80,7 @@ void printTicket(int pnr){
 
 }
 
-void cancelTicket(int pnr) {
+void cancelTicket(int pnr){
     for(int i =0; i< confirmedCount; i++){
         if(confirmd[i].pnr == pnr){
             printf("Ticket with PNR %d cancelled.\n", pnr);
@@ -139,6 +145,7 @@ int main(){
 
 
     
+
 
 
 
