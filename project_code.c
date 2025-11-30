@@ -8,11 +8,21 @@
 // status either confirmed or waiting for each passenger
 enum Status { CONFIRMED, WAITING }; 
 
+// structure for train information
+typedef struct{
+   int train_number;
+   char train_name[50];
+   char from[30];
+   char to[30]; 
+   char date[15];
+} Train;
+
 // to store passenger details we use  -> structure
 typedef struct {
     int pnr;
     char name[50];
     enum Status status;
+    Train train_info;
 } Passenger;
 
 Passenger confirmed[MAX_SEATS];   // array which stores confirmed passengers 
@@ -34,13 +44,38 @@ int seatsAvailable() {
     return MAX_SEATS - confirmedCount;
 }
 
+// function for  taking input of train details
+void Train_details(Train *train){
+    printf("Enter Train Number: ");
+    scanf("%d", &train->train_number);
+    getchar();
+
+    printf("Enter the Train Name: ");
+    fgets(train->train_name, 50, stdin);
+    train->train_name[strcspn(train->train_name, "\n")] = 0;
+
+    printf("Enter the station from you take the train: ");
+    fgets(train->from, 50, stdin);
+    train->from[strcspn(train->from, "\n")] = 0;
+
+    printf("Enter the station where you want to reach: ");
+    fgets(train->to, 50, stdin);
+    train->to[strcspn(train->to, "\n")] = 0;
+
+    printf("Enter the Journey Date(DD/MM/YYYY): ");
+    scanf("%s", train->date);
+
+}
+
 //function to book the tickets
 void Book_Tickect(char name[]){
     Passenger p;
-    p.pnr = genrate_PNR();
+    p.pnr = gentrate_PNR();
     strcpy(p.name, name);
 
-     if(confirmedCount < MAX_SEATS){
+    Train_details(&p.train_info); // input of train details
+
+    if(confirmedCount < MAX_SEATS){
         p.status = CONFIRMED;
         confirmed[confirmedCount++] = p;
         printf("Ticket Booked Successfully!\n");
@@ -65,6 +100,11 @@ void printTicket(int pnr){
             printf("PNR: %d\n", confirmed[i].pnr);
             printf("Name: %s\n", confirmed[i].name);
             printf("Status: CONFIRMED\n");
+            printf("Train No.: %d\n", confirmed[i].train_info.train_number);
+            printf("Train Name: %s\n", confirmed[i].train_info.train_name);
+            printf("From: %s\n", confirmed[i].train_info.from);
+            printf("To: %s\n", confirmed[i].train_info.to);
+            printf("Date: %s\n", confirmed[i].train_info.date);
             printf("\n------------------------------------\n");
             return;
         }
@@ -75,6 +115,11 @@ void printTicket(int pnr){
             printf("PNR: %d\n", waiting[i].pnr);
             printf("Name: %s\n", waiting[i].name);
             printf("Status: WAITING\n");
+            printf("Train No.: %d\n", waiting[i].train_info.train_number);
+            printf("Train Name: %s\n", waiting[i].train_info.train_name);
+            printf("From: %s\n", waiting[i].train_info.from);
+            printf("To: %s\n", waiting[i].train_info.to);
+            printf("Date: %s\n", waiting[i].train_info.date);
             printf("\n------------------------------------\n");
             return;
         }
@@ -164,6 +209,7 @@ int main(){
 
 
     
+
 
 
 
