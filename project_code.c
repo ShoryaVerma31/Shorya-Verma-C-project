@@ -1,5 +1,5 @@
 #include <stdio.h> 
-#include <stdlib.h>
+#include <stdlib.h>  //  using exit(0) for exiting
 #include <string.h>
 
 #define MAX_SEATS 5       // maximum avaliable seats for confirmation
@@ -209,6 +209,7 @@ int main(){
 
 
     
+
 
 
 
