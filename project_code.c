@@ -29,10 +29,12 @@ int gentrate_PNR(){
     return next_pnr++;
 }
 
+// function for checking  availability of seats
 int seatsAvailable() {
     return MAX_SEATS - confirmedCount;
 }
 
+//function to book the tickets
 void Book_Tickect(char name[]){
     Passenger p;
     p.pnr = genrate_PNR();
@@ -55,6 +57,7 @@ void Book_Tickect(char name[]){
     printf("Your PNR: %d\n", p.pnr);
 }
 
+// function for printing the the ticket 
 void printTicket(int pnr){
     for(int i =0; i < confirmedCount; i++){
         if(confirmed[i].pnr == pnr){
@@ -76,25 +79,41 @@ void printTicket(int pnr){
             return;
         }
     }
-    printf("No ticket found with PNR: %d\n", pnr);
+    printf("No ticket found with this PNR: %d\n", pnr);
 
 }
 
+// function to cancel the tickets
 void cancelTicket(int pnr){
+    int found=0;
     for(int i =0; i< confirmedCount; i++){
-        if(confirmd[i].pnr == pnr){
+        if(confirmed[i].pnr == pnr){
+            found=1;
             printf("Ticket with PNR %d cancelled.\n", pnr);
 
-            for(int j = i, j < confirmedCount - 1; j++){
+            for(int j = i; j < confirmedCount - 1; j++){   // shifting remaining pasengers
                 confirmed[j] = confirmed[j+1];
             }
             confirmedCount--;
-
-            if(watingCount > 0){
+            
+            // shifting the paasenger from waiting list to confirmed
+            if(waitingCount > 0){
                 confirmed[confirmedCount++] = waiting[0];
-            }
+                confirmed[confirmedCount-1].status = CONFIRMED;
+            
+                // shifting of waiting list
+                for(int j=0; j<waitingCount -1; j++){
+                waiting[j] = waiting[j+1];
+                }
+                waitingCount--;
+                printf("Seat confirmed for the passenger from waiting list");
                 
-        }
+           }
+           break;
+       }  
+    }
+    if(!found){
+        printf("passenger with PNR %d not found in confirmed list\n");
     }
 }
 
@@ -119,7 +138,7 @@ int main(){
             case 2 : 
                 printf("Enter Passenger Name: "); 
                 scanf("%s", name);
-                bookTicket(name);
+                Book_Tickect(name);
                 break;
             case 3 :
                 printf("Enter PNR to cancel: "); 
@@ -145,6 +164,7 @@ int main(){
 
 
     
+
 
 
 
